@@ -59,7 +59,7 @@ nav li { flex: 1 1 auto; }
 nav a { display: block; position: relative; padding: 0 8px; font-size: 19px; line-height: 37px; letter-spacing: 0; color: var(--ink); text-decoration: none; white-space: nowrap; }
 nav a:hover { color: var(--accent); }
 nav a[aria-current="page"]::after { content: ""; position: absolute; left: 50%; bottom: -1px; width: 13px; height: 13px; background: var(--surface);
-  border-right: 1px solid #000; border-bottom: 1px solid #000; transform: translate(-50%, 50%) rotate(45deg); }
+  border-right: 1px solid #000; border-bottom: 1px solid #000; transform: translate(-50%, 50%) rotate(45deg); clip-path: polygon(100% 0, 100% 100%, 0 100%); }
 
 /* Bands: one centered column */
 .band { padding-block: 57px 64px; padding-inline: max(16px, calc((100% - var(--col)) / 2)); }
