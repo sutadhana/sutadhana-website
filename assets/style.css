@@ -1,0 +1,159 @@
+/* SUTA-DHANA — typography and header colors matched to the original site;
+   accents shared with the Pali course app (learn.sutadhana.com) */
+
+/* Calibri files: served from this site (assets/fonts, added at deploy);
+   the Wix copies are a fallback until then. */
+@font-face { font-family: "SD Calibri Light"; font-display: swap;
+  src: url("fonts/calibri-light.woff2") format("woff2"),
+       url("https://static.wixstatic.com/ufonts/1305c3_b148631cfd154436a624ee6597fe7682/woff2/file.woff2") format("woff2"); }
+@font-face { font-family: "SD Calibri"; font-display: swap;
+  src: url("fonts/calibri.woff2") format("woff2"),
+       url("https://static.wixstatic.com/ufonts/343069_4415df9871d943c59d432c7dc4fa5beb/woff2/file.woff2") format("woff2"); }
+@font-face { font-family: "SD Calibri Bold"; font-weight: 700; font-display: swap;
+  src: url("fonts/calibri-bold.woff2") format("woff2"),
+       url("https://static.wixstatic.com/ufonts/343069_fca013bff4a24d8c90afe352e06c98c0/woff2/file.woff2") format("woff2"); }
+
+@font-face { font-family: "SD Heebo"; font-weight: 300; font-display: swap;
+  src: url("fonts/heebo.woff2") format("woff2"),
+       url("https://static.parastorage.com/tag-bundler/api/v1/fonts-cache/googlefont/woff2/s/heebo/v15/NGSpv5_NC0k9P_v6ZUCbLRAHxK1EiSysd0mm.woff2") format("woff2"); }
+
+:root {
+  --frame: #FFF6E9;      /* header & footer, as on the original site */
+  --surface: #FEFAF5;    /* page */
+  --soft: #EEEFE9;       /* alternating bands */
+  --ink: #333333;
+  --muted: #5F655C;
+  --line: #D8D3C4;
+  --accent: #5E6E58;     /* sage, shared with the course app */
+  --accent-hover: #45523F;
+  --accent-ink: #FEFAF5;
+  --closed: #FFBABA;
+  --hl: #E5F0FE;
+  --light: "SD Calibri Light", "Calibri Light", Carlito, Calibri, "Segoe UI", sans-serif;
+  --reg: "SD Calibri", Calibri, Carlito, "Segoe UI", sans-serif;
+  --bold: "SD Calibri Bold", Calibri, Carlito, "Segoe UI", sans-serif;
+  --quote: "SD Heebo", "Heebo", sans-serif;
+  --col: 980px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: auto; }
+body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; background: var(--surface); color: var(--ink);
+  font-family: var(--light); font-size: 23px; line-height: 2.05; letter-spacing: .03em; -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  font-variant-ligatures: common-ligatures; }
+main { flex: 1 0 auto; }
+a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { color: var(--accent); }
+img { max-width: 100%; }
+em { font-style: italic; }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 16px; top: 8px; background: var(--surface); padding: 4px 8px; z-index: 9; }
+
+/* Header */
+.site-header { background: var(--frame); text-align: center; padding: 54px 0 0; border-bottom: 1px solid #000; }
+.brand { font-family: var(--reg); font-size: 38px; line-height: 1.5; color: var(--ink); text-decoration: none; letter-spacing: 0; }
+.brand:hover { color: var(--ink); }
+.tagline { margin: 0 0 4px; font-size: 19px; line-height: 1.5; letter-spacing: 0; }
+.site-header .leaf { display: block; margin: 12px auto 18px; }
+nav ul { list-style: none; margin: 0; padding: 0; display: flex; }
+nav li { flex: 1 1 auto; }
+nav a { display: block; position: relative; padding: 0 8px; font-size: 18px; line-height: 37px; letter-spacing: 0; color: var(--ink); text-decoration: none; white-space: nowrap; }
+nav a:hover { color: var(--accent); }
+nav a[aria-current="page"]::after { content: ""; position: absolute; left: 50%; bottom: -1px; width: 13px; height: 13px; background: var(--surface);
+  border-right: 1px solid #000; border-bottom: 1px solid #000; transform: translate(-50%, 50%) rotate(45deg); }
+
+/* Bands: one centered column */
+.band { padding-block: 57px 64px; padding-inline: max(16px, calc((100% - var(--col)) / 2)); }
+.center { text-align: center; }
+.right { text-align: right; }
+.soft { background: var(--soft); }
+.page-title { font-family: var(--reg); font-weight: 400; font-size: 34px; line-height: 1.4; letter-spacing: .03em; margin: 0 0 47px; text-wrap: balance; }
+.page-title .wide { letter-spacing: .15em; }
+.subtitle { font-family: var(--reg); font-weight: 400; font-size: 27px; line-height: 1.48; letter-spacing: .05em; margin: 0 0 36px; }
+.subtitle.light { font-family: var(--light); font-size: 30px; letter-spacing: 0; }
+.intro p { margin: 0 0 32px; }
+.intro p:last-child { margin-bottom: 0; }
+.prose { padding-block: 29px 64px; padding-left: max(16px, calc((100% - var(--col)) / 2 + 20px)); padding-right: max(16px, calc((100% - var(--col)) / 2 + 35px)); }
+.prose .page-title { margin-bottom: 49px; margin-right: -15px; }
+.prose h3 { font-family: var(--bold); font-weight: 700; font-size: 26px; line-height: inherit; margin: 0; }
+.prose p { margin: 0 0 33px; }
+.btn-outline, .btn, button { display: inline-block; font-family: var(--reg); font-size: 20px; letter-spacing: 0; line-height: 1.4; text-decoration: none; cursor: pointer; }
+.btn-outline { border: 1px solid var(--ink); color: var(--ink); background: transparent; padding: 8px 32px; }
+.btn-outline:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn, button { border: 0; background: var(--accent); color: var(--accent-ink); border-radius: 999px; padding: 8px 42px; }
+.btn:hover, button:hover { background: var(--accent-hover); color: var(--accent-ink); }
+
+/* Home: floating leaves and the AN 5.47 quote, placed as on the original */
+.intro { position: relative; padding-bottom: 47px; }
+.deco { position: absolute; width: 40px; height: 40px; }
+.deco-a { top: 337px; left: calc(50% - 483px); }
+.deco-b { top: 703px; left: calc(50% + 452px); transform: scaleX(-1); }
+.quote-band { background: var(--soft); padding-block: 45px 42px; }
+.quote-band .leaf { display: block; }
+.leaf-start { margin-left: 181px; }
+.leaf-end { margin-left: 726px; transform: scaleX(-1); }
+.quote-cols { display: grid; grid-template-columns: 570px 1fr; text-align: left; margin: 12px 0 20px; }
+.quote-cols > * { min-width: 0; }
+blockquote { margin: 0; max-width: 505px; font-family: var(--quote); font-weight: 300; font-style: italic; font-size: 18px; line-height: 2; letter-spacing: .05em; }
+blockquote[lang="pi"], .ref { font-family: Tahoma, Verdana, "DejaVu Sans", sans-serif; font-weight: 400; }
+@media (min-width: 761px) { blockquote { white-space: nowrap; } }
+.ref { font-size: 14px; line-height: 2; letter-spacing: .05em; margin-top: 42px; }
+
+/* Resources */
+.toc-band { padding-block: 32px 30px; border-bottom: 1px solid var(--ink); }
+.toc-band .page-title { margin-bottom: 43px; }
+.toc-h { font-family: var(--reg); font-weight: 400; font-size: 30px; line-height: 1.3; letter-spacing: .03em; margin: 0 0 10px; }
+ul.toc { margin: 0; padding-left: 39px; font-family: var(--light); font-size: 22px; line-height: 1.9; letter-spacing: .05em; }
+ul.toc li::marker { color: var(--ink); }
+.res-band { padding-block: 20px 70px; }
+.res-band .section-h { padding-left: 25px; }
+.section-h { font-family: var(--reg); font-weight: 400; font-size: 33px; line-height: 1.3; letter-spacing: .03em; margin: 0 0 28px; scroll-margin-top: 16px; }
+ul.links { margin: 0; padding-left: 66px; line-height: 1.4; }
+ul.links li { margin-bottom: 35px; }
+ul.links li:last-child { margin-bottom: 0; }
+ul.recs { list-style: none; padding: 0; margin: 0; line-height: 2.2; }
+
+/* Registration */
+.courses { padding-left: 1.2em; line-height: 1.2; }
+.hl { background: var(--hl); }
+.status.closed { background: var(--closed); padding: 0 4px; }
+.card { background: var(--surface); border: 1px solid var(--muted); border-radius: 6px; box-shadow: 0 1px 2px rgba(51,51,51,.05), 0 4px 14px rgba(51,51,51,.06); padding: 24px; }
+.form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; max-width: 620px; margin: 32px auto 0; text-align: left; font-family: var(--reg); letter-spacing: 0; }
+.form.narrow { max-width: 480px; }
+.form label { display: flex; flex-direction: column; font-size: 16px; line-height: 1.4; gap: 4px; }
+.form .full { grid-column: 1 / -1; }
+.row3 { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr 2fr; gap: 14px; }
+input, select, textarea { font: inherit; font-size: 16px; color: var(--ink); background: #F7F7F4; border: 1px solid #A9AFA5; border-radius: 4px; padding: 6px 10px; width: 100%; }
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.hp { display: none; }
+
+/* Dāna: the donation box, embedded as on the original site */
+.dana-embed { padding-block: 0 24px; }
+.dana-embed iframe { display: block; width: 100%; height: 1100px; border: 0; background: var(--surface); }
+
+/* Footer */
+.site-footer { background: var(--frame); text-align: center; padding: 22px 16px 24px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.site-footer a { font-family: var(--light); color: #282626; text-decoration: none; font-size: 16px; letter-spacing: .12em; line-height: 1.4; }
+.site-footer a:hover { color: var(--accent); }
+
+@media (max-width: 760px) {
+  body { font-size: 18px; line-height: 1.8; }
+  .site-header { padding-top: 30px; }
+  .brand { font-size: 32px; }
+  nav ul { justify-content: center; flex-wrap: wrap; }
+  nav li { flex: 0 0 auto; }
+  nav a { font-size: 16px; line-height: 30px; padding: 0 10px 6px; }
+  .band { padding-block: 44px; }
+  .page-title { font-size: 28px; margin-bottom: 26px; }
+  .subtitle { font-size: 22px; }
+  .quote-cols { grid-template-columns: 1fr; gap: 28px; }
+  .deco { display: none; }
+  .leaf-start, .leaf-end { margin-left: auto; margin-right: auto; }
+  .form, .row3 { grid-template-columns: 1fr; }
+  .prose .page-title { margin-right: 0; }
+  ul.links { padding-left: 24px; }
+  .res-band .section-h { padding-left: 0; }
+  ul.toc { padding-left: 24px; }
+  ul.links li { margin-bottom: 22px; }
+  .section-h { font-size: 27px; }
+  .dana-embed iframe { height: 1300px; }
+}

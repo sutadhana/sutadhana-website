@@ -1,0 +1,36 @@
+# Publishes the site to GitHub Pages.
+# On each publish it copies the site's fonts (Calibri Light / Calibri / Calibri Bold,
+# uploaded to the Wix account, and Heebo) into assets/fonts so the site serves them itself.
+name: Publish site
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add fonts
+        run: |
+          mkdir -p assets/fonts
+          curl -fsSL -o assets/fonts/calibri-light.woff2 https://static.wixstatic.com/ufonts/1305c3_b148631cfd154436a624ee6597fe7682/woff2/file.woff2
+          curl -fsSL -o assets/fonts/calibri.woff2       https://static.wixstatic.com/ufonts/343069_4415df9871d943c59d432c7dc4fa5beb/woff2/file.woff2
+          curl -fsSL -o assets/fonts/calibri-bold.woff2  https://static.wixstatic.com/ufonts/343069_fca013bff4a24d8c90afe352e06c98c0/woff2/file.woff2
+          curl -fsSL -o assets/fonts/heebo.woff2         https://static.parastorage.com/tag-bundler/api/v1/fonts-cache/googlefont/woff2/s/heebo/v15/NGSpv5_NC0k9P_v6ZUCbLRAHxK1EiSysd0mm.woff2
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4
