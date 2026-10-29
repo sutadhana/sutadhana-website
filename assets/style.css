@@ -87,15 +87,16 @@ nav a[aria-current="page"]::after { content: ""; position: absolute; left: 50%; 
 .deco { position: absolute; width: 40px; height: 40px; }
 .deco-a { top: 337px; left: calc(50% - 483px); }
 .deco-b { top: 703px; left: calc(50% + 452px); transform: scaleX(-1); }
-.quote-band { background: var(--soft); padding-block: 45px 42px; }
+.quote-band { background: var(--soft); padding-block: 45px 42px; padding-inline: max(16px, calc((100% - 1100px) / 2)); }
 .quote-band .leaf { display: block; }
 .leaf-start { margin-left: 181px; }
 .leaf-end { margin-left: 726px; transform: scaleX(-1); }
-.quote-cols { display: grid; grid-template-columns: 570px 1fr; text-align: left; margin: 12px 0 20px; }
+.quote-cols { display: grid; grid-template-columns: auto auto; justify-content: space-between; column-gap: 56px; text-align: left; margin: 12px 0 20px; }
 .quote-cols > * { min-width: 0; }
-blockquote { margin: 0; max-width: 505px; font-family: var(--quote); font-weight: 300; font-style: italic; font-size: 19px; line-height: 2; letter-spacing: .05em; }
+blockquote { margin: 0; font-family: var(--quote); font-weight: 300; font-style: italic; font-size: 19px; line-height: 2; letter-spacing: .05em; }
 blockquote[lang="pi"], .ref { font-family: Tahoma, Verdana, "DejaVu Sans", sans-serif; font-weight: 400; }
-@media (min-width: 761px) { blockquote { white-space: nowrap; } }
+@media (min-width: 1150px) { blockquote { white-space: nowrap; } }
+@media (max-width: 1149px) { .quote-cols { grid-template-columns: 1fr 1fr; } }
 .ref { font-size: 15px; line-height: 2; letter-spacing: .05em; margin-top: 42px; }
 
 /* Resources */
@@ -142,6 +143,8 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); ou
   nav ul { justify-content: center; flex-wrap: wrap; }
   nav li { flex: 0 0 auto; }
   nav a { font-size: 17px; line-height: 30px; padding: 0 10px 6px; }
+  nav a[aria-current="page"] { font-family: var(--bold); font-weight: 700; }
+  nav a[aria-current="page"]::after { display: none; }
   .band { padding-block: 44px; }
   .page-title { font-size: 29px; margin-bottom: 26px; }
   .subtitle { font-size: 23px; }

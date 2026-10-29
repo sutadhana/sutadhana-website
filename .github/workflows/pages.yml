@@ -1,18 +1,18 @@
 # Publishes the site to GitHub Pages.
-# On each publish it copies the site's fonts (Calibri Light / Calibri / Calibri Bold,
-# uploaded to the Wix account, and Heebo) into assets/fonts so the site serves them itself.
+# The first time, it also saves the fonts and the old Wix-hosted files into the
+# repository (assets/fonts, assets/files), so the site never depends on Wix again.
 name: Publish site
 on:
   push:
     branches: [main]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -21,13 +21,26 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Add fonts
+      - name: Save fonts and files into the repository (once)
         run: |
-          mkdir -p assets/fonts
-          curl -fsSL -o assets/fonts/calibri-light.woff2 https://static.wixstatic.com/ufonts/1305c3_b148631cfd154436a624ee6597fe7682/woff2/file.woff2
-          curl -fsSL -o assets/fonts/calibri.woff2       https://static.wixstatic.com/ufonts/343069_4415df9871d943c59d432c7dc4fa5beb/woff2/file.woff2
-          curl -fsSL -o assets/fonts/calibri-bold.woff2  https://static.wixstatic.com/ufonts/343069_fca013bff4a24d8c90afe352e06c98c0/woff2/file.woff2
-          curl -fsSL -o assets/fonts/heebo.woff2         https://static.parastorage.com/tag-bundler/api/v1/fonts-cache/googlefont/woff2/s/heebo/v15/NGSpv5_NC0k9P_v6ZUCbLRAHxK1EiSysd0mm.woff2
+          set -e
+          mkdir -p assets/fonts assets/files
+          get() { [ -s "$1" ] || curl -fsSL -o "$1" "$2"; }
+          get assets/fonts/calibri-light.woff2 https://static.wixstatic.com/ufonts/1305c3_b148631cfd154436a624ee6597fe7682/woff2/file.woff2
+          get assets/fonts/calibri.woff2       https://static.wixstatic.com/ufonts/343069_4415df9871d943c59d432c7dc4fa5beb/woff2/file.woff2
+          get assets/fonts/calibri-bold.woff2  https://static.wixstatic.com/ufonts/343069_fca013bff4a24d8c90afe352e06c98c0/woff2/file.woff2
+          get assets/fonts/heebo.woff2         https://static.parastorage.com/tag-bundler/api/v1/fonts-cache/googlefont/woff2/s/heebo/v15/NGSpv5_NC0k9P_v6ZUCbLRAHxK1EiSysd0mm.woff2
+          get assets/files/pali-workshop-booklet.pdf https://5d488c73-5c27-4af7-9c7f-d8918f9828d2.filesusr.com/ugd/847b2b_65d874c29c6a4def858067d42d9f61cf.pdf
+          get assets/files/pali-grammar-summary.pdf  https://5d488c73-5c27-4af7-9c7f-d8918f9828d2.filesusr.com/ugd/847b2b_5e6abbe9508a47af90700cd9c1a6713d.pdf
+          get assets/files/lesson-reminders.ics      "https://5d488c73-5c27-4af7-9c7f-d8918f9828d2.filesusr.com/ugd/847b2b_527d03c9815d4c0cb090c31eef30ffbc.ics?dn=Lesson%20Reminders.ics"
+          ls -la assets/fonts assets/files
+          if [ -n "$(git status --porcelain assets)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+            git add assets/fonts assets/files
+            git commit -m "Save fonts and files (no longer depend on Wix)"
+            git push
+          fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
