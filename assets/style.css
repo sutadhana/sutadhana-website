@@ -156,3 +156,9 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); ou
   .section-h { font-size: 28px; }
   .dana-embed iframe { height: 1300px; }
 }
+
+/* Form result message */
+.form-msg { margin: 4px 0 0; font-size: 17px; line-height: 1.5; padding: 10px 14px; border-radius: 4px; }
+.form-msg.ok { background: #E3EEDF; color: #2F5233; }
+.form-msg.err { background: #F8E1DC; color: #7A2E1E; }
+.form-msg.err a { color: inherit; }
