@@ -72,8 +72,8 @@ nav a[aria-current="page"]::after { content: ""; position: absolute; left: 50%; 
 .subtitle.light { font-family: var(--light); font-size: 31px; letter-spacing: 0; }
 .intro p { margin: 0 0 32px; }
 .intro p:last-child { margin-bottom: 0; }
-.prose { padding-block: 29px 64px; padding-left: max(16px, calc((100% - var(--col)) / 2 + 20px)); padding-right: max(16px, calc((100% - var(--col)) / 2 + 35px)); }
-.prose .page-title { margin-bottom: 49px; margin-right: -15px; }
+.prose { padding-block: 29px 64px; padding-inline: max(16px, calc((100% - 1040px) / 2)); }
+.prose .page-title { margin-bottom: 49px; }
 .prose h3 { font-family: var(--bold); font-weight: 700; font-size: 27px; line-height: inherit; margin: 0; }
 .prose p { margin: 0 0 33px; }
 .btn-outline, .btn, button { display: inline-block; font-family: var(--reg); font-size: 21px; letter-spacing: 0; line-height: 1.4; text-decoration: none; cursor: pointer; }
@@ -149,7 +149,6 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); ou
   .deco { display: none; }
   .leaf-start, .leaf-end { margin-left: auto; margin-right: auto; }
   .form, .row3 { grid-template-columns: 1fr; }
-  .prose .page-title { margin-right: 0; }
   ul.links { padding-left: 24px; }
   .res-band .section-h { padding-left: 0; }
   ul.toc { padding-left: 24px; }
