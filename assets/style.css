@@ -128,7 +128,7 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); ou
 .hp { display: none; }
 
 /* Dāna: donation box (card or PayPal) */
-.dana .intro { max-width: 720px; margin: 0 auto; padding-bottom: 0; }
+.dana .intro { max-width: 820px; margin: 0 auto; padding-bottom: 0; text-align: left; }
 .dana-box { max-width: 520px; margin: 44px auto 0; padding: 26px 24px 22px; font-family: var(--reg); letter-spacing: 0; line-height: 1.4; }
 .dana-h { font-family: var(--reg); font-weight: 400; font-size: 22px; margin: 0 0 16px; }
 .dana-amounts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
