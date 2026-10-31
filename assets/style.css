@@ -127,9 +127,25 @@ input, select, textarea { font: inherit; font-size: 17px; color: var(--ink); bac
 input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .hp { display: none; }
 
-/* Dāna: the donation box, embedded as on the original site */
-.dana-embed { padding: 0; }
-.dana-embed iframe { display: block; width: 100%; height: 1095px; border: 0; background: var(--surface); }
+/* Dāna: donation box (card or PayPal) */
+.dana .intro { max-width: 720px; margin: 0 auto; padding-bottom: 0; }
+.dana-box { max-width: 520px; margin: 44px auto 0; padding: 26px 24px 22px; font-family: var(--reg); letter-spacing: 0; line-height: 1.4; }
+.dana-h { font-family: var(--reg); font-weight: 400; font-size: 22px; margin: 0 0 16px; }
+.dana-amounts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.dana-amounts button { border-radius: 8px; padding: 0; height: 50px; font-size: 21px; background: var(--soft); color: var(--ink); border: 1px solid var(--line); }
+.dana-amounts button:hover { background: var(--line); color: var(--ink); }
+.dana-amounts button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.dana-other { display: flex; align-items: center; gap: 8px; margin-top: 12px; border: 1px solid #A9AFA5; border-radius: 8px; padding: 0 14px; background: #F7F7F4; }
+.dana-other span { font-size: 20px; color: var(--muted); }
+.dana-other input { border: 0; background: transparent; padding: 0; height: 48px; font-size: 20px; }
+.dana-other input:focus { outline: none; }
+.dana-other:focus-within { outline: 2px solid var(--accent); outline-offset: 1px; }
+.dana-note { font-size: 16px; color: var(--muted); margin: 16px 0 0; }
+#dana-buttons { margin-top: 18px; min-height: 120px; }
+.dana-wait { font-size: 17px; color: var(--muted); margin: 0; padding-top: 24px; }
+.dana-msg { font-size: 16px; color: #7A2E1E; min-height: 1em; margin: 6px 0 0; }
+.dana-done { margin-top: 44px; }
+.dana-done p { margin: 0 0 12px; }
 
 /* Footer */
 .site-footer { background: var(--frame); text-align: center; padding: 22px 16px 24px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
@@ -157,7 +173,6 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); ou
   ul.toc { padding-left: 24px; }
   ul.links li { margin-bottom: 22px; }
   .section-h { font-size: 28px; }
-  .dana-embed iframe { height: 1300px; }
 }
 
 /* Form result message */
