@@ -7,6 +7,15 @@
       other = document.getElementById('dana-other'), btns = document.querySelectorAll('[data-amt]'), chosen = '50';
   if (!box) return;
 
+  /* Apple Pay: PayPal's on-page buttons don't offer it for this account, so on Apple devices
+     show a button to PayPal's hosted donation page (open amount), which does. */
+  try {
+    var ua = navigator.userAgent, apple = document.getElementById('dana-apple');
+    var canApple = (window.ApplePaySession && ApplePaySession.canMakePayments && ApplePaySession.canMakePayments()) ||
+                   /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    if (apple && canApple) apple.hidden = false;
+  } catch (e) {}
+
   btns.forEach(function (b) {
     b.addEventListener('click', function () {
       chosen = b.getAttribute('data-amt'); other.value = ''; msg.textContent = '';
