@@ -190,7 +190,3 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); ou
   .apple-pay-btn { -webkit-appearance: -apple-pay-button; -apple-pay-button-type: donate; -apple-pay-button-style: black; background: none; }
 }
 .apple-pay-link:hover .apple-pay-btn { opacity: .88; }
-
-.site-footer .credit { margin: 4px 0 0; font-family: var(--light); font-size: 13px; letter-spacing: .04em; color: #6b6660; }
-.site-footer .credit a { font-size: inherit; letter-spacing: inherit; color: inherit; text-decoration: underline; text-underline-offset: 2px; }
-.site-footer .credit a:hover { color: var(--accent); }
