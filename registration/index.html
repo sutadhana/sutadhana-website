@@ -89,12 +89,16 @@
   </form>
 </section>
 <script>
+var SHEET_URL = "https://script.google.com/macros/s/AKfycbwb7JHWD3oSJX9my4ja9niYYnHtHwhf-Ng4l9o7VzIBlvFzAdBIaablXe-bT4iohnRn/exec";
 document.querySelectorAll(".js-form").forEach(function (form) {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var btn = form.querySelector("button"), msg = form.querySelector(".form-msg"), label = btn.textContent;
     btn.disabled = true; btn.textContent = "Sending…"; msg.hidden = true;
     var data = Object.fromEntries(new FormData(form).entries());
+    if (!data.botcheck) {
+      fetch(SHEET_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(data) }).catch(function () {});
+    }
     fetch(form.action, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(data) })
       .then(function (r) { return r.json(); })
       .then(function (res) {
