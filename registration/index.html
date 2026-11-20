@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&family=Heebo:wght@300&display=swap" rel="stylesheet">
 <link rel="preload" href="../assets/fonts/calibri-light.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/style.css?v=13">
+<link rel="stylesheet" href="../assets/style.css?v=15">
 </head>
 <body>
 <a class="skip" href="#main">Skip to Main Content</a>
@@ -45,7 +45,8 @@
   <p>Before applying, please be sure to read the course description under <a href="../more-information/">More Information</a>.</p>
   <p><strong>Upcoming Courses:</strong></p>
   <ul class="courses">
-    <li><span class="hl">Beginners | Saturdays &amp; Tuesdays at 1 PM UTC | Starting October 3, 2026</span><br>(see in your <a href="https://www.timeanddate.com/worldclock/fixedtime.html?msg=Pali+Course++-+October+3%2C+2026&iso=20261003T13&p1=1440&ah=1&am=15">local time</a>) | <span class="status closed">Close</span></li>
+    <li><span class="hl">Beginners | Saturdays &amp; Tuesdays at 1&nbsp;PM&nbsp;UTC | Starting October 3, 2026</span><br>(see in your <button type="button" class="lt-btn" aria-expanded="false" data-times="2026-10-03T13:00Z,2026-10-06T13:00Z">local time</button>) | <span class="status closed">Close</span><span class="lt-box" role="status" hidden></span></li>
+    <li><span class="hl">Beginners | Thursdays at 2&nbsp;AM&nbsp;UTC | Starting December 3, 2026</span><br>Once a week, about 20 lessons:<br>Wednesday evening in the Americas,<br>Thursday morning in Asia &amp; Australia<br>(see in your <button type="button" class="lt-btn" aria-expanded="false" data-times="2026-12-03T02:00Z">local time</button>) | <span class="status open">Open</span><span class="lt-box" role="status" hidden></span></li>
   </ul>
   <form class="card form js-form" action="https://api.web3forms.com/submit" method="POST">
     <input type="hidden" name="access_key" value="1c648618-77d0-4e7e-a533-900ff958d552">
@@ -56,7 +57,7 @@
     <label class="full">Choose course *
       <select name="Course" required>
         <option value="" selected disabled></option>
-        <option>Beginners | Saturdays &amp; Tuesdays at 1 PM UTC | Starting October 3, 2026</option>
+        <option>Beginners | Thursdays at 2 AM UTC | Starting December 3, 2026</option>
       </select>
     </label>
     <label>First name *<input name="First name" required autocomplete="given-name"></label>
@@ -88,6 +89,27 @@
     <p class="form-msg full" role="status" hidden></p>
   </form>
 </section>
+<script>
+document.querySelectorAll(".lt-btn").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var box = btn.closest("li").querySelector(".lt-box");
+    var open = box.hidden;
+    if (open) {
+      var zone = "", times = btn.dataset.times.split(",").map(function (t) { return new Date(t); });
+      try { zone = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) {}
+      var day = function (d) { return d.toLocaleDateString("en-US", { weekday: "long" }) + "s"; };
+      var days = times.map(day);
+      var dayText = days.length > 1 ? days.slice(0, -1).join(", ") + " &amp; " + days[days.length - 1] : days[0];
+      var time = times[0].toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+      var first = times[0].toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+      box.innerHTML = "In your time zone" + (zone ? " (" + zone.replace(/_/g, " ") + ")" : "") + ":<br>" +
+        "<strong>" + dayText + " at " + time + "</strong><br>First lesson:<br>" + first;
+    }
+    box.hidden = !open;
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+});
+</script>
 <script>
 var SHEET_URL = "https://script.google.com/macros/s/AKfycbwb7JHWD3oSJX9my4ja9niYYnHtHwhf-Ng4l9o7VzIBlvFzAdBIaablXe-bT4iohnRn/exec";
 document.querySelectorAll(".js-form").forEach(function (form) {
