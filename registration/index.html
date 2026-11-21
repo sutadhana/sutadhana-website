@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&family=Heebo:wght@300&display=swap" rel="stylesheet">
 <link rel="preload" href="../assets/fonts/calibri-light.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/style.css?v=16">
+<link rel="stylesheet" href="../assets/style.css?v=17">
 </head>
 <body>
 <a class="skip" href="#main">Skip to Main Content</a>
@@ -46,7 +46,7 @@
   <p><strong>Upcoming Courses:</strong></p>
   <ul class="courses">
     <li><span class="hl">Beginners | Saturdays &amp; Tuesdays at 1&nbsp;PM&nbsp;UTC | Starting October 3, 2026</span><br>(see in your <button type="button" class="lt-btn" aria-expanded="false" data-times="2026-10-03T13:00Z,2026-10-06T13:00Z">local time</button>) | <span class="status closed">Close</span><span class="lt-box" role="status" hidden></span></li>
-    <li><span class="hl">Beginners | Thursdays at 2&nbsp;AM&nbsp;UTC | Starting December 3, 2026</span><br>Once a week, about 20 lessons:<br>Wednesday evening in the Americas,<br>Thursday morning in Asia &amp; Australia<br>(see in your <button type="button" class="lt-btn" aria-expanded="false" data-times="2026-12-03T02:00Z">local time</button>) | <span class="status open">Open</span><span class="lt-box" role="status" hidden></span></li>
+    <li><span class="hl">Beginners | Mondays &amp; Thursdays at 2&nbsp;AM&nbsp;UTC | Starting December 3, 2026</span><br>Twice a week, about 30–35 lessons:<br>Sunday &amp; Wednesday evenings <span class="nw">in the Americas,</span><br>Monday &amp; Thursday mornings <span class="nw">in Asia &amp; Australia</span><br>(see in your <button type="button" class="lt-btn" aria-expanded="false" data-times="2026-12-07T02:00Z,2026-12-03T02:00Z">local time</button>) | <span class="status open">Open</span><span class="lt-box" role="status" hidden></span></li>
   </ul>
   <form class="card form js-form" action="https://api.web3forms.com/submit" method="POST">
     <input type="hidden" name="access_key" value="1c648618-77d0-4e7e-a533-900ff958d552">
@@ -57,7 +57,7 @@
     <label class="full">Choose course *
       <select name="Course" required>
         <option value="" selected disabled></option>
-        <option>Beginners | Thursdays at 2 AM UTC | Starting December 3, 2026</option>
+        <option>Beginners | Mondays &amp; Thursdays at 2 AM UTC | Starting December 3, 2026</option>
       </select>
     </label>
     <label>First name *<input name="First name" required autocomplete="given-name"></label>
@@ -101,7 +101,8 @@ document.querySelectorAll(".lt-btn").forEach(function (btn) {
       var days = times.map(day);
       var dayText = days.length > 1 ? days.slice(0, -1).join(", ") + " &amp; " + days[days.length - 1] : days[0];
       var time = times[0].toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
-      var first = times[0].toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+      var earliest = times.reduce(function (a, b) { return b < a ? b : a; });
+      var first = earliest.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
       box.innerHTML = "In your time zone" + (zone ? " (" + zone.replace(/_/g, " ") + ")" : "") + ":<br>" +
         "<strong>" + dayText + " at " + time + "</strong><br>First lesson:<br>" + first;
     }
